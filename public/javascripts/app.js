@@ -5,17 +5,18 @@ angular.module('voting',[])
     $scope.candidates = [];
     $scope.ballot = [];
     $scope.getAll = function() {
-			return $http.get('/voting').success(function(data){
-				angular.copy(data, $scope.candidates);
-			});
+	return $http.get('/voting').success(function(data){
+		angular.copy(data, $scope.candidates);
+	});
     };
 
     $scope.getAll();
 
     $scope.create = function(candidate) {
-			return $http.post('/voting', candidate).success(function(data){
-				$scope.candidates.push(data);
-			});
+	console.log(candidate);
+		return $http.post('/voting', candidate).success(function(data){
+			$scope.candidates.push(data);
+		});
     };
 
     $scope.dovote = function() {
@@ -36,8 +37,10 @@ angular.module('voting',[])
         });
     };
 
-    $scope.addCandidate = function() {
+    $scope.addCandidate = function(){ 
+	console.log($scope.formContent);
       var newObj = {Name:$scope.formContent,votes:0};
+      console.log(newObj);
       $scope.create(newObj);
       $scope.formContent = '';
     }
